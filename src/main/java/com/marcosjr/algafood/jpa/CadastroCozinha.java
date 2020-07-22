@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
@@ -19,5 +20,25 @@ public class CadastroCozinha {
 		return manager.createQuery("from Cozinha", Cozinha.class)
 				.getResultList();
 		
-	}	
+	}
+	
+	public Cozinha buscar(Long id) {
+		return manager.find(Cozinha.class, id);
+	}
+	
+	@Transactional
+	public Cozinha salvar(Cozinha cozinha) {
+		return manager.merge(cozinha);
+	}
+	
+	@Transactional
+	public void remover(Cozinha cozinha) {
+		
+		// Primeiro é necessário transformar o estado do objeto para managed
+		// para depois poder remover ele
+		
+		cozinha = buscar(cozinha.getId());
+		manager.remove(cozinha);
+	}
+	
 }
