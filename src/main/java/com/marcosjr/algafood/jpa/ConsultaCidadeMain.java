@@ -7,25 +7,25 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
 import com.marcosjr.algafood.AlgafoodApiApplication;
-import com.marcosjr.algafood.domain.model.Cozinha;
-import com.marcosjr.algafood.domain.repository.CozinhaRepository;
+import com.marcosjr.algafood.domain.model.Cidade;
+import com.marcosjr.algafood.domain.repository.CidadeRepository;
 
 // 	Classe utilizada para poder rodar a aplicação sem a necessidade de subir um
 // 	aplicação web que fica esperando requisições
 
-public class ConsultaCozinhaMain {
+public class ConsultaCidadeMain {
 	
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = new SpringApplicationBuilder(AlgafoodApiApplication.class)
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+		CidadeRepository cidadeRepository = applicationContext.getBean(CidadeRepository.class);
 		
-		List<Cozinha> cozinhas = cozinhaRepository.listar();
+		List<Cidade> cidades = cidadeRepository.listar();
 		
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
+		for (Cidade cidade : cidades) {
+			System.out.println(cidade.getNome() + " - " + cidade.getEstado().getNome());
 		}
 		
 	}

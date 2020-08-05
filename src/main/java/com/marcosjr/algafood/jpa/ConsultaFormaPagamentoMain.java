@@ -7,25 +7,25 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
 import com.marcosjr.algafood.AlgafoodApiApplication;
-import com.marcosjr.algafood.domain.model.Cozinha;
-import com.marcosjr.algafood.domain.repository.CozinhaRepository;
+import com.marcosjr.algafood.domain.model.FormaPagamento;
+import com.marcosjr.algafood.domain.repository.FormaPagamentoRepository;
 
 // 	Classe utilizada para poder rodar a aplicação sem a necessidade de subir um
 // 	aplicação web que fica esperando requisições
 
-public class ConsultaCozinhaMain {
+public class ConsultaFormaPagamentoMain {
 	
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = new SpringApplicationBuilder(AlgafoodApiApplication.class)
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+		FormaPagamentoRepository formaPagamentoRepository = applicationContext.getBean(FormaPagamentoRepository.class);
 		
-		List<Cozinha> cozinhas = cozinhaRepository.listar();
+		List<FormaPagamento> formasPagamento = formaPagamentoRepository.listar();
 		
-		for (Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
+		for (FormaPagamento formaPagamento : formasPagamento) {
+			System.out.println("Forma pagamento: " + formaPagamento.getDescricao());
 		}
 		
 	}
